@@ -68,8 +68,8 @@ def scrape():
 
     for hemi in hemispheres:
     # Collect Title
-        hemi = hemispheres.find('div', class_="description").text
-        # name = title.h3.text
+        hemi = hemi.find('div', class_="description")
+        name = hemi.h3.text
         hemi_titles.append(hemi)
 
     # image_urls = []
