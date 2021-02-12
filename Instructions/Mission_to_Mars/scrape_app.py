@@ -50,51 +50,24 @@ def scrape():
     browser.visit(usg_url)
     soup2 = bs(browser.html, 'html.parser')
 
-    hemispheres = soup2.find_all('div', class_='item')
-    hrefs = []
-    hemi_titles = []
-    hemisphere_images = []
-    #
-    # for hemi in hemispheres:
-    #     href = hemi.find('a',class_="itemLink product-item")['href']
-    #     hrefs.append(href)
-    #     title = hemi.find('div', class_="description")
-    #     name = title.h3.text
-    #     hemi_titles.append(title)
-    #     hemi_url = f'{usg_base}{href}'
-    #     hemisphere_images.append(hemi_url)
+    urls = []
+    for image in range(4):
+        browser.find_by_css('a.product-item h3')[image].click()
+        html = bs(browser.html,'html.parser')
+        titleelement = html.find("h2",class_="title").get_text()
+        hrefelement = html.find('a',text = "Sample").get('href')
+        browser.back()
+        hemi_dict = {"title":titleelement, "image_url":hrefelement}
+        urls.append(hemi_dict)
+    #print(urls)
 
-
-
-    for hemi in hemispheres:
-    # Collect Title
-        hemi = hemi.find('div', class_="description")
-        name = hemi.h3.text
-        hemi_titles.append(hemi)
-
-    # image_urls = []
-    # for image in images:
-        image_link = f'{usg_base}{image}'
-        hemisphere_images.append({"caption": hemi_titles,
-        "hemisphere_image":hemisphere_images})
-    # print(image_urls)
-    # for image in image_urls:
-    #     print(image)
-    # Create mars_dict:
-    # listings = []
-    # cere = {"title":titles[0], 'image':images[0]}
-    # schia = {"title":titles[1], 'image':images[1]}
-    # syrt = {"title":titles[2], 'image':images[2]}
-    # mari = {"title":titles[3], 'image':images[3]}
-    # listings = [cere, schia, syrt, mari]
 
     mars= {
     "news_title": news_titles,
     "paragraph": paragraph,
     "featured_image": featured_url_link,
     "fact_table" : mars_facts,
-    "caption": hemi_titles,
-    "hemisphere_images": hemisphere_images
+    "hemisphere_images": urls
     }
 
 

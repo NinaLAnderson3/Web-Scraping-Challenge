@@ -51,13 +51,15 @@
               <div class="page-header">
                 <h2 class="text-center text-white">Mars Hemispheres</h2>
               </div>
-              {% for hemi in mars.hemispheres %}
-                <div class="col-md-6">
+              {% for hemi in mars.hemisphere_images %}
+                <h4>test</h4>
+                <div class="col-md-3">
+                    
                     <div class="thumbnail">
-                    <img src="{{mars.hemisphere_images}}"
+                    <img src="{{hemi.image_url}}"
                         alt="...">
                     <div class="caption">
-                        <h3>{{mars.hemi_title}}</h3>
+                        <h3>{{hemi.title}}</h3>
                     </div>
                     </div>
                 </div>
